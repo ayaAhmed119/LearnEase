@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="./assets/css/admin.css">
+</head>
+
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <ul>
+            <li><a href="#dashboard">Add Lessons</a></li>
+            <li><a href="#courses">Courses</a></li>
+            <li><a href="#categories">Categories</a></li>
+            <li><a href="#students">Students</a></li>
+            <li><a href="#approvals">Approvals</a></li>
+            <li class="logout-link"><a href="login.html" onclick="logout()">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section">
+            <h2>Lessons Section</h2>
+            <button class="add-btn" onclick="openAddLessonForm()">+ Add Lesson</button>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Course Title</th>
+                        <th>Lesson Title</th>
+                        <th>Link of video</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="lessons-table-body"></tbody>
+            </table>
+
+            <!-- نموذج إضافة درس -->
+            <div id="lessonForm" class="form-popup" style="display: none;">
+                <div class="form-container">
+                    <h2>Add New Lesson</h2>
+
+                    <label for="lesson-course">Select Course:</label>
+                    <select id="lesson-course"></select>
+
+                    <label>Lesson Title:</label>
+                    <input type="text" id="lesson-title" placeholder="Enter lesson title">
+
+                    <label>Video URL:</label>
+                    <input type="text" id="lesson-video-url" placeholder="Enter video URL">
+
+                    <label>Description:</label>
+                    <textarea id="lesson-desc" placeholder="Enter lesson description"></textarea>
+
+                    <button class="submit-btn" onclick="addLesson()">Save</button>
+                    <button class="close-btn" onclick="closeForm('lessonForm')">Close</button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Courses Section -->
+        <section id="courses" class="section">
+            <h2>Manage Courses</h2>
+            <button class="add-btn" onclick="openForm('courseForm')">+ Add New Course</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Instructor</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Duration</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Categories Section -->
+        <section id="categories" class="section">
+            <h2>Manage Categories</h2>
+            <button class="add-btn" onclick="openForm('categoryForm')">+ Add New Category</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Students Section -->
+        <section id="students" class="section">
+            <h2>Student Progress</h2>
+            <table id="progressTable">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Course Name</th>
+                        <th>Progress</th>
+                        <th>Feedback rate</th>
+                        <th>Feedback Comment</th>
+                    </tr>
+                </thead>
+                <tbody id="progressTableBody"></tbody>
+            </table>
+        </section>
+
+        <!-- Approvals Section -->
+        <section id="approvals" class="section">
+            <h2>Course Approvals</h2>
+            <table>
+                <thead>
+                    <!-- <tr>
+                        <th>Student Name</th>
+                        <th>Requested Course</th>
+                        <th>Actions</th>
+                    </tr> -->
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Course ID</th>
+                        <th>Status</th>
+                        <th>payment status </th>
+
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="requests-table-body">
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <!-- Course Form (Add) -->
+    <div id="courseForm" class="form-popup">
+        <div class="form-container">
+            <h2>Add New Course</h2>
+            <label>Title:</label>
+            <input type="text" id="course-title" placeholder="Enter course title">
+
+            <label>Image:</label>
+            <input type="text" id="course-image" placeholder="Enter course image URL">
+
+
+            <label>Category:</label>
+            <select id="course-category">
+
+            </select>
+
+            <label>Instructor Name:</label>
+            <input type="text" id="instructor-name" placeholder="Enter instructor name">
+
+            <label>Description:</label>
+            <textarea id="course-desc" placeholder="Enter course description"></textarea>
+
+            <label>Price (if applicable):</label>
+            <input type="text" id="course-price" placeholder="Enter price or 'Free'">
+
+            <label>Duration:</label>
+            <input type="text" id="course-duration" placeholder="Enter duration (e.g., 4 weeks)">
+
+
+
+            <button class="submit-btn" onclick="addCourse()">Save</button>
+            <button class="close-btn" onclick="closeForm('courseForm')">Close</button>
+        </div>
+    </div>
+
+    <!-- Course Form (Edit) -->
+    <div id="editCourseForm" class="form-popup">
+        <div class="form-container">
+            <h2>Edit Course</h2>
+
+
+            <label>Title:</label>
+            <input type="text" id="edit-course-title">
+
+            <label>Image:</label>
+            <input type="file" id="edit-course-image">
+
+            <label>Category:</label>
+            <select id="edit-course-category"></select>
+
+            <label>Instructor Name:</label>
+            <input type="text" id="edit-instructor-name">
+
+            <label>Description:</label>
+            <textarea id="edit-course-desc"></textarea>
+
+            <label>Price:</label>
+            <input type="text" id="edit-course-price">
+
+            <label>Duration:</label>
+            <input type="text" id="edit-course-duration">
+
+
+            <button class="submit-btn">Update</button>
+            <button class="close-btn" onclick="closeForm('editCourseForm')">Close</button>
+        </div>
+    </div>
+
+    <!-- Category Form -->
+    <div id="categoryForm" class="form-popup">
+        <div class="form-container">
+            <h2>Add Category</h2>
+            <label>Category Name:</label>
+            <input type="text" id="category-name" placeholder="Enter category name">
+
+            <button class="submit-btn" onclick="addCategory()">Save</button>
+            <button class="close-btn" onclick="closeForm('categoryForm')">Close</button>
+        </div>
+    </div>
+
+    <!-- Category Edit Form -->
+    <div id="editCategoryForm" class="form-popup">
+        <div class="form-container">
+            <h2>Edit Category</h2>
+            <!-- <label>Category ID:</label>
+            <input type="text" id="category-id" value="C123" disabled> -->
+
+            <label>Category Name:</label>
+            <input type="text" id="edit-category-name">
+
+            <button class="submit-btn">Update</button>
+            <button class="close-btn" onclick="closeForm('editCategoryForm')">Close</button>
+        </div>
+    </div>
+
+    <!-- Add Lesson Form -->
+
+    <div id="editLessonForm" class="form-popup">
+        <div class="form-container">
+            <h2>Edit Lesson</h2>
+            <label>Lesson Title:</label>
+            <input type="text" id="edit-lesson-title" placeholder="Enter lesson title">
+
+            <label>Video URL:</label>
+            <input type="text" id="edit-lesson-video-url" placeholder="Enter video URL">
+
+            <label>Description:</label>
+            <textarea id="edit-lesson-desc" placeholder="Enter lesson description"></textarea>
+
+            <button class="submit-btn" onclick="editLesson()">Update</button>
+            <button class="close-btn" onclick="closeForm('editLessonForm')">Close</button>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+
+    <!-- JavaScript Code -->
+    <script src="./firebase/config.js"></script>
+    <script src="./assets/js/storage.js"></script>
+    <script src="./assets/js/courses.js"></script>
+    <script src="./assets/js/admin.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate of Completion</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .certificate {
+            background: white;
+            padding: 40px;
+            border: 10px solid #4CAF50;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        .certificate h1 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .certificate p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .certificate .name {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .certificate .course {
+            font-style: italic;
+            color: #333;
+        }
+
+        .certificate .instructor {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .certificate .date {
+            font-style: italic;
+            color: #666;
+            margin-top: 20px;
+        }
+
+        .download-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="./firebase/config.js"></script>
+    <script src="./assets/js/storage.js"></script>
+    <script src="./assets/js/courses.js"></script>
+</head>
+
+<body>
+    <div class="certificate" id="certificate">
+        <h1>Certificate of Completion</h1>
+        <p>This is to certify that</p>
+        <p class="name" id="studentName">Loading...</p>
+        <p>has successfully completed the course</p>
+        <p class="course" id="courseTitle">Loading...</p>
+        <p>under the instruction of</p>
+        <p class="instructor" id="instructorName">Loading...</p>
+        <p>with distinction.</p>
+        <p class="date" id="dateTime">Loading...</p>
+        <button class="download-btn" id="downloadButton" onclick="downloadCertificate()">Download Certificate</button>
+    </div>
+
+    <script>
+        // جلب بيانات المستخدم من localStorage
+        const userData = Storage.fetchLocalData("userData");
+
+        if (!userData) {
+            console.error("No student data found!");
+            document.getElementById('studentName').textContent = "[Student Name]";
+        } else {
+            document.getElementById('studentName').textContent = userData.name || "[Student Name]";
+        }
+
+        // جلب courseId من URL
+        const params = new URLSearchParams(window.location.search);
+        const courseId = params.get('id');
+        console.log(courseId);
+        
+        if (courseId) {
+            fetchCourseById(courseId, (course) => {
+                if (course) {
+                    document.getElementById('courseTitle').textContent = course.title || "[Course Title]";
+                    document.getElementById('instructorName').textContent = course.instructor || "[Instructor Name]";
+                } else {
+                    console.error("Course not found!");
+                }
+            });
+        } else {
+            console.error("No course ID provided in URL!");
+        }
+
+        // جلب تاريخ الإتمام
+        const completionDate = params.get('date') || new Date();
+        const formattedDate = new Date(completionDate).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        document.getElementById('dateTime').textContent = `Completed on: ${formattedDate}`;
+
+        // تحميل الشهادة كصورة
+        function downloadCertificate() {
+            const downloadButton = document.getElementById('downloadButton');
+            downloadButton.style.display = 'none';
+
+            html2canvas(document.getElementById('certificate')).then(canvas => {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = `${userData ? userData.name : "certificate"}_certificate.png`;
+                link.click();
+                downloadButton.style.display = 'block';
+            });
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+
+</html>

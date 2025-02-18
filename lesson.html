@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Page</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background-color: #003b4d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            background: white;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #007b8f;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+
+        .nav-links .active {
+            background: #ffcc00;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: black;
+        }
+
+        /* Page Content */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .video-container {
+            width: 65%;
+        }
+
+        .course-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #003b4d;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .course-description {
+            background: #e9ecef;
+            color: #003b4d;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+
+        .content-container {
+            width: 30%;
+            background-color: #17a2b8;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #f8f9fa;
+            text-align: center;
+        }
+
+        .course-item {
+            background: #00394f;
+            padding: 15px;
+            margin: 5px 0;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .course-item:hover {
+            background: #ffcc00;
+            color: #000;
+        }
+
+        .course-item.completed {
+            background: #28a745;
+            color: white;
+        }
+
+        .course-item.current {
+            background: #ffcc00;
+            color: #000;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        button {
+            background: #00394f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover:not(:disabled) {
+            background: #e6b800;
+            color: black;
+        }
+
+        button:disabled {
+            background: #cccccc;
+            color: #666666;
+            cursor: not-allowed;
+        }
+
+        .progress-container {
+            margin-top: 20px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 15px;
+            background-color: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar>div {
+            height: 100%;
+            background-color: #28a745;
+        }
+
+        .progress-text {
+            margin-top: 10px;
+            text-align: center;
+            color: #003b4d;
+        }
+        .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+    .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    }
+
+    .modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    }
+
+    .modal textarea {
+    width: 100%;
+    padding: 8px;
+    }
+
+    .form-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="logo">LearnEase</div>
+        <div class="nav-links">
+            <a href="./student.html">Home</a>
+            <a href="#my-courses">My Courses</a>
+            <a href="#all-courses">All Courses</a>
+            <a href="index.html" class="logout-btn" id="logout">Logout</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="video-container">
+            <div class="course-title" id="course-title">Introduction to the Course</div>
+            <iframe id="course-video" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen>
+                
+            </iframe>
+            <div class="course-description" id="course-description">
+                This course provides an overview of the essential tools and techniques needed to start your learning
+                journey.
+                You will gain a solid foundation and hands-on experience through interactive lessons.
+            </div>
+            <div id="progress-bar-container" class="progress-container">
+                <div class="progress-bar">
+                    <div id="progress-bar" style="width: 0%"></div>
+                </div>
+                <span id="progress-text" class="progress-text">Progress: 0/4 videos completed</span>
+            </div>
+        </div>
+
+        <div class="content-container">
+            <h2>Course Content</h2>
+            <div id="course-content">
+            </div>
+
+            <div class="buttons">
+                <button id="prev-button">Previous</button>
+                <button id="next-button">Next</button>
+            </div>
+            <br/>
+            <div class="buttons">
+                <button id="certificate-button" style="display: none;">GetCertificate</button></div>
+            <div class="buttons">
+                <button id="review-button">Review Course</button>
+                </div>
+        </div>
+    </div>
+<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+<script src="./firebase/config.js"></script>
+<script src="./assets/js/storage.js"></script>
+<script src="./assets/js/courses.js"></script>
+<script src="./assets/js/lesson.js"></script>
+    
+
+</body>
+
+</html>

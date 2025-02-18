@@ -1,0 +1,138 @@
+/* General Styles */
+:root {
+    --primary: #17a2b8;
+    --secondary: #00394f;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Navbar Styles */
+.navbar {
+    width: 100%;
+    background-color: var(--primary);
+    padding: 15px 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar-brand i {
+    margin-right: 10px;
+    font-size: 28px;
+}
+
+.navbar-brand .logo {
+    color: #fff;
+}
+
+/* Form Container */
+.form-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    margin-top: 100px;
+    /* To avoid overlap with the fixed navbar */
+}
+
+/* Form Header */
+.form-container h2 {
+    color: var(--secondary);
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Form Groups */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--secondary);
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: var(--secondary);
+    outline: none;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus,
+.form-group select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 5px rgba(23, 162, 184, 0.5);
+}
+
+/* Checkbox Styles */
+.checkbox-label {
+    display: inline-block;
+    margin-right: 15px;
+    color: var(--secondary);
+    font-weight: normal;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* Submit Button */
+.form-group input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-group input[type="submit"]:hover {
+    background-color: var(--secondary);
+}
+
+/* Error Messages */
+#mobileError,
+#emailError {
+    color: #ff0000;
+    font-size: 14px;
+    margin-top: 5px;
+}

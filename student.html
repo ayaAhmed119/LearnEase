@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        /* Root Variables */
+:root {
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --primary: #17a2b8;
+  --secondary: #00394f;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --dark: #343a40;
+}
+
+/* Course Card Container */
+.course-card {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 15px;
+  max-width: 320px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  border: 1px solid var(--light);
+}
+
+/* Hover Effect */
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Course Image */
+.course-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Course Title */
+.course-card h3 {
+  font-size: 20px;
+  color: var(--dark);
+  margin: 12px 0;
+  font-weight: bold;
+}
+
+/* Course Info */
+.course-card p {
+  font-size: 14px;
+  color: var(--gray);
+  margin: 5px 0;
+}
+
+/* Buttons */
+.course-card button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+/* Enroll Button */
+.enroll-btn {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.enroll-btn:hover {
+  background: var(--info);
+}
+
+/* Continue Button */
+.continue-btn {
+  background: var(--success);
+  color: var(--white);
+}
+
+.continue-btn:hover {
+  background: var(--green);
+}
+
+/* View Course Button */
+.viewcourse-btn {
+  background: var(--orange);
+  color: var(--white);
+}
+
+.viewcourse-btn:hover {
+  background: #e86b00;
+}
+
+/* Wishlist Button */
+.wishlist-btn {
+  background: var(--pink);
+  color: var(--white);
+}
+
+.wishlist-btn:hover {
+  background: #d63377;
+}
+
+/* Remove from Wishlist */
+.remove-wishlist-btn {
+  background: var(--danger);
+  color: var(--white);
+}
+
+.remove-wishlist-btn:hover {
+  background: #c82333;
+}
+
+/* Responsive Grid for Courses */
+.courses-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">E-Learning</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#my-courses">My Courses</a></li>
+                <li><a href="#all-courses">All Courses</a></li>
+                <li><a href="index.html" class="logout-btn" id="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Welcome Section -->
+    <section class="welcome">
+        <h2>Welcome, <span id="student-name">Ahmed</span> !</h2>
+        <p>Keep learning and track your progress.</p>
+    </section>
+
+    <!-- My Courses Section -->
+    <section id="my-courses" class="courses-section">
+        <h2>My Courses</h2>
+        <div class="courses-container">
+            <!-- Dynamically Load Courses Here -->
+            <div class="course-card">
+                <img src="assets/images/png-clipart-pedagogy-massive-open-online-course-education-university-student-student-computer-network-angle.png"
+                    alt="Course Image" class="course-image">
+                <h3>JavaScript Basics</h3>
+                <p>Instructor: John Doe</p>
+                <p>Category: Programming</p>
+                <p>Duration: 10 hours</p>
+                <button class="enroll-btn">Enroll Now</button>
+            </div>
+            <div class="course-card">
+                <img src="assets/images/png-clipart-pedagogy-massive-open-online-course-education-university-student-student-computer-network-angle.png"
+                    alt="Course Image" class="course-image">
+                <h3>JavaScript Basics</h3>
+                <p>Instructor: John Doe</p>
+                <p>Category: Programming</p>
+                <p>Duration: 10 hours</p>
+                <button class="enroll-btn">Enroll Now</button>
+            </div>
+            <div class="course-card">
+                <img src="assets/images/png-clipart-pedagogy-massive-open-online-course-education-university-student-student-computer-network-angle.png"
+                    alt="Course Image" class="course-image">
+                <h3>JavaScript Basics</h3>
+                <p>Instructor: John Doe</p>
+                <p>Category: Programming</p>
+                <p>Duration: 10 hours</p>
+                <button class="enroll-btn">Enroll Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Courses Section -->
+    <section id="all-courses" class="courses-section">
+        <h2>All Courses</h2>
+        <input type="text" id="search-courses" placeholder="Search courses...">
+        <select id="filter-category">
+            <option value="">All Categories</option>
+        </select>
+        <div class="courses-container">
+            <!-- Example Course Card -->
+            <div class="course-card">
+                <img src="assets/images/png-clipart-pedagogy-massive-open-online-course-education-university-student-student-computer-network-angle.png" alt="Course Image" class="course-image">
+                <h3>JavaScript Basics</h3>
+                <p>Instructor: John Doe</p>
+                <p>Category: Programming</p>
+                <p>Duration: 10 hours</p>
+                <button class="enroll-btn">Enroll Now</button>
+            </div>
+
+            <!-- Example Course Card -->
+            <div class="course-card">
+                <img src="assets/images/png-clipart-pedagogy-massive-open-online-course-education-university-student-student-computer-network-angle.png"
+                    alt="Course Image" class="course-image">
+                <h3>JavaScript Basics</h3>
+                <p>Instructor: John Doe</p>
+                <p>Category: Programming</p>
+                <p>Duration: 10 hours</p>
+                <button class="enroll-btn">Enroll Now</button>
+                <button class="whichlist-btn">Add to Wishlist</button>
+
+            </div>
+
+                        <div class="course-card">
+                            <img src="assets/images/png-clipart-pedagogy-massive-open-online-course-education-university-student-student-computer-network-angle.png"
+                                alt="Course Image" class="course-image">
+                            <h3>JavaScript Basics</h3>
+                            <p>Instructor: John Doe</p>
+                            <p>Category: Programming</p>
+                            <p>Duration: 10 hours</p>
+                            <button class="enroll-btn">Enroll Now</button>
+                        </div>
+
+                        <div class="course-card">
+                            <img src="assets/images/png-clipart-pedagogy-massive-open-online-course-education-university-student-student-computer-network-angle.png"
+                                alt="Course Image" class="course-image">
+                            <h3>JavaScript Basics</h3>
+                            <p>Instructor: John Doe</p>
+                            <p>Category: Programming</p>
+                            <p>Duration: 10 hours</p>
+                            <button class="enroll-btn">Enroll Now</button>
+                        </div>
+
+                                    <div class="course-card">
+                                        <img src="assets/images/png-clipart-pedagogy-massive-open-online-course-education-university-student-student-computer-network-angle.png"
+                                            alt="Course Image" class="course-image">
+                                        <h3>JavaScript Basics</h3>
+                                        <p>Instructor: John Doe</p>
+                                        <p>Category: Programming</p>
+                                        <p>Duration: 10 hours</p>
+                                        <button class="enroll-btn">Enroll Now</button>
+                                    </div>
+
+        </div>
+    </section>
+
+    <!-- Wishlist Section -->
+    <section id="wishlist" class="courses-section">
+        <h2>Wishlist</h2>
+        <div class ="wishlist-container"id ="wishlist-container">
+            <!-- Dynamically Load Wishlist Courses Here -->
+                        <div class="course-card">
+                            <img src="assets/images/png-clipart-pedagogy-massive-open-online-course-education-university-student-student-computer-network-angle.png"
+                                alt="Course Image" class="course-image">
+                            <h3>JavaScript Basics</h3>
+                            <p>Instructor: John Doe</p>
+                            <p>Category: Programming</p>
+                            <p>Duration: 10 hours</p>
+                            <button class="enroll-btn">Enroll Now</button>
+                        </div>
+
+                                    <div class="course-card">
+                                        <img src="assets/images/png-clipart-pedagogy-massive-open-online-course-education-university-student-student-computer-network-angle.png"
+                                            alt="Course Image" class="course-image">
+                                        <h3>JavaScript Basics</h3>
+                                        <p>Instructor: John Doe</p>
+                                        <p>Category: Programming</p>
+                                        <p>Duration: 10 hours</p>
+                                        <button class="enroll-btn">Enroll Now</button>
+                                    </div>
+
+            <div class="course-card">
+                <img src="assets/images/png-clipart-pedagogy-massive-open-online-course-education-university-student-student-computer-network-angle.png"
+                    alt="Course Image" class="course-image">
+                <h3>JavaScript Basics</h3>
+                <p>Instructor: John Doe</p>
+                <p>Category: Programming</p>
+                <p>Duration: 10 hours</p>
+                <button class="enroll-btn">Enroll Now</button>
+            </div>
+
+                        <div class="course-card">
+                            <img src="assets/images/png-clipart-pedagogy-massive-open-online-course-education-university-student-student-computer-network-angle.png"
+                                alt="Course Image" class="course-image">
+                            <h3>JavaScript Basics</h3>
+                            <p>Instructor: John Doe</p>
+                            <p>Category: Programming</p>
+                            <p>Duration: 10 hours</p>
+                            <button class="enroll-btn">Enroll Now</button>
+                        </div>
+
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 E-Learning System. All rights reserved.</p>
+    </footer>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="./firebase/config.js"></script>
+    <script src="./assets/js/storage.js"></script>
+    <script src="./assets/js/courses.js"></script>
+    <script src="./assets/js/student.js"></script>
+</body>
+
+</html>
